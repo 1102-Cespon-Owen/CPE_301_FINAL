@@ -7,12 +7,15 @@ void setup() {
 // Need to finish states/double check the states. On Friday. start looking at non library stuff
 void loop() {
   // put your main code here, to run repeatedly:
-  bool error, idle, start, reset, fan, disabled; 
+  bool error, idle, start, reset, fan, disabled, moniWater, moniTemp; 
   bool gLED = 0, yLED = 0, rLED = 0,  bLED = 0;  
-  double waterLvl = 0, temp = 0, humidity = 0, maxTemp = 0. thresholdWtr = 0; 
+  double waterLvl = 0, temp = 0, humidity = 0, maxTemp = 0, thresholdWtr = 0; 
 
 
-  if(start = 1){
+  if(start == 1){
+    //THIS IS WHERE WE WILL CALL CHECKWATER AND CHECKTEMP FUNCTIONS
+    moniWater = 1;
+    moniTemp = 1;
 
     // CHECKING IF TEMP IS GREATER THAN MAX TO TURN ON COOLER
     if(temp > maxTemp){
@@ -27,7 +30,7 @@ void loop() {
       // need to display temp and humidity
 
     // TURNS THE COOLER TO IDLE IF TEMP IS BELOW THE MAXTEMP
-    } else if(temp <= maxTemp){
+    }if(temp <= maxTemp){
       idle = 1; // means idling
       fan = 0; 
 
@@ -40,7 +43,7 @@ void loop() {
     } 
     
     // ERROR CHECKING FOR WATER LEVEL
-    if(waterLvl <= thresholdWtr){
+    if(waterLvl < thresholdWtr){
       println("Water level is too low");
       error = 1; 
       idle = 0; 
@@ -52,35 +55,39 @@ void loop() {
 
 
       // Check if reset button is pressed
-      if(reset == 1){
+      if(reset == 1 && waterLvl >= thresholdWtr){
         idle = 1;
 
         rLED = 0;
         bLED = 0;
         yLED = 0;
         gLED = 1; 
-      }
-
-
-    
+      }    
     }
-      // if start = 0 anywhere
-      if(start == 0){
-        fan = 0; 
-        disabled = 1;
-
-        rLED = 0;
-        bLED = 0;
-        yLED = 1;
-        gLED = 0; 
-
-
-      }
   }
+  // if start = 0 anywhere
+  //This is essentially just disabled
+  else{
+    fan = 0; 
+    //disabled = 1;
+    moniWater = 0;
+    moniTemp = 0;
+
+    rLED = 0;
+    bLED = 0;
+    yLED = 1;
+    gLED = 0; 
 }
 
 
 
-bool checkWater(){}
+//Work on next
 
-bool checkTemp(){}
+double checkWater(){
+  //Use water level sensor from kit
+
+}
+
+double checkTemp(){
+// Use temperature and humidity module.
+}
