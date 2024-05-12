@@ -79,7 +79,7 @@ int waterValue = 0;
 
 //Variables for dealy
 unsigned long lastExecutionTime = 0;
-const unsigned long stateDelay = 7000;
+const unsigned long stateDelay = 60000;
 
 
 // SETUP ============================================================================
@@ -118,7 +118,7 @@ void setup(){
   rtc.setFormat(12);        //Set 12 Hours Format
   rtc.setAMPM(1);           //Set AM or PM    0 = AM  1 =PM
   rtc.setTime("6:37:12");  //Set Time    Hour:Minute:Seconds
-  rtc.setDate("5/11/24");   //Set Date    Month/Date/Year
+  rtc.setDate("5/12/24");   //Set Date    Month/Date/Year
 
   // DHT SET UP
   dht.begin();
